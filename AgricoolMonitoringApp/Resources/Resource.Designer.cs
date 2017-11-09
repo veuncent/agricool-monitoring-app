@@ -26,6 +26,7 @@ namespace AgricoolMonitoringApp
 		
 		public static void UpdateIdValues()
 		{
+			global::Microcharts.Droid.Resource.String.library_name = global::AgricoolMonitoringApp.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -37,6 +38,25 @@ namespace AgricoolMonitoringApp
 			}
 			
 			private Attribute()
+			{
+			}
+		}
+		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f040001
+			public const int chartView1 = 2130968577;
+			
+			// aapt resource value: 0x7f040000
+			public const int textView1 = 2130968576;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
 			{
 			}
 		}
@@ -60,8 +80,11 @@ namespace AgricoolMonitoringApp
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f030001
+			public const int app_name = 2130903041;
+			
 			// aapt resource value: 0x7f030000
-			public const int app_name = 2130903040;
+			public const int library_name = 2130903040;
 			
 			static String()
 			{
