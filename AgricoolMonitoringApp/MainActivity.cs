@@ -33,17 +33,52 @@ namespace AgricoolMonitoringApp
 
         public async Task StartUpdateAsync()
         {
-            List<Entry> entries = new List<Entry>();
-            var chartView = FindViewById<ChartView>(Resource.Id.chartView1);
+            List<Entry> temperatureEntries = new List<Entry>();
+
+            List<Entry> waterLevelEntries = new List<Entry>();
+            Entry initialWaterLevel = ClimateMetricService.GetWaterTankLevelEntry(_cooltainerId);
+            waterLevelEntries.Add(initialWaterLevel);
+
+            var temperatureChartView = FindViewById<ChartView>(Resource.Id.temperatureChartView1);
+            var humidityChartView = FindViewById<ChartView>(Resource.Id.humidityChartView1);
+            var co2ChartView = FindViewById<ChartView>(Resource.Id.co2ChartView1);
+            var pressureChartView = FindViewById<ChartView>(Resource.Id.pressureChartView1);
+            var waterLevelChartView = FindViewById<ChartView>(Resource.Id.waterLevelChartView1);
 
             while (true)
             {
-                var latestTemp = ClimateMetricService.GetTemperatureEntry(_cooltainerId);
-                entries.Add(latestTemp);
+                // Temperature
+                Entry latestTemp = ClimateMetricService.GetTemperatureEntry(_cooltainerId);
+                temperatureEntries.Add(latestTemp);
 
-                TrimGraphToTimespan(entries);
+                TrimGraphToTimespan(temperatureEntries);
+                temperatureChartView.Chart = new LineChart() { Entries = temperatureEntries };
 
-                chartView.Chart = new LineChart() { Entries = entries };
+                // Humidity
+                List<Entry> humidityEntries = ClimateMetricService.GetHumidityEntryList(_cooltainerId);
+                humidityChartView.Chart = new DonutChart() { Entries = humidityEntries };
+
+                // CO2
+                List<Entry> co2Entries = ClimateMetricService.GetCo2LevelEntryList(_cooltainerId);
+                co2ChartView.Chart = new DonutChart() { Entries = co2Entries };
+
+                // pressure
+                List<Entry> pressureEntries = ClimateMetricService.GetPressureEntryList(_cooltainerId);
+                pressureChartView.Chart = new DonutChart() { Entries = pressureEntries };
+
+
+                // Watering tank level
+                var latestWaterLevel = waterLevelEntries.Last().Value - 1;
+                Entry latestWaterLevelEntry = new Entry(latestWaterLevel)
+                {
+                    Label = DateTime.Now.ToString("h:mm:ss tt"),
+                    ValueLabel = latestWaterLevel.ToString() + "liters",
+                    Color = SKColor.Parse("#1E75D6")
+                };
+
+                waterLevelEntries.Add(latestWaterLevelEntry);
+                TrimGraphToTimespan(waterLevelEntries);
+                waterLevelChartView.Chart = new LineChart() { Entries = waterLevelEntries };
 
                 await Task.Delay(1000);
             }
