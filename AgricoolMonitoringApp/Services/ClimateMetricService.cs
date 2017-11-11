@@ -41,7 +41,8 @@ namespace AgricoolMonitoringApp.Services
 
             Entry humidityEntry = new Entry(humidity)
             {
-                Label = "Humidity: " + humidity.ToString() + "%",
+                Label = humidity.ToString(),
+                ValueLabel = "%",
                 Color = SKColor.Parse("#1E75D6")
             };
 
@@ -70,7 +71,8 @@ namespace AgricoolMonitoringApp.Services
 
             Entry co2LevelEntry = new Entry(co2Level)
             {
-                Label = "CO2: " + co2Level.ToString() + " ppm",
+                Label = co2Level.ToString(),
+                ValueLabel = "ppm",
                 Color = SKColor.Parse("#1ED1D6")
             };
 
@@ -99,7 +101,8 @@ namespace AgricoolMonitoringApp.Services
 
             Entry pressureEntry = new Entry(pressure)
             {
-                Label = "Pressure: " + pressure.ToString() + " kPa",
+                Label = pressure.ToString(),
+                ValueLabel = "kPa",
                 Color = SKColor.Parse("#D61E3D")
             };
 
@@ -119,22 +122,29 @@ namespace AgricoolMonitoringApp.Services
         /// Get watering tank level for Microcharts graph
         /// </summary>
         /// <param name="cooltainerId">Id of Cooltainer of interest</param>
-        /// <returns>Microcharts Entry with watering tank level in liters + rest value</returns>
+        /// <returns>Microcharts Entry with watering tank level in liters</returns>
         public static Entry GetWaterTankLevelEntry(int cooltainerId)
         {
-
             var waterLevel = GetWaterTankLevel(cooltainerId);
+            return GetWaterTankLevelEntry(waterLevel);
+        }
 
+        /// <summary>
+        /// Get Entry object for Microcharts graph, representing a watering tank level
+        /// </summary>
+        /// <param name="waterLevel">Watering tank level in liters as float</param>
+        /// <returns>Microcharts Entry with watering tank level in liters</returns>
+        public static Entry GetWaterTankLevelEntry(float waterLevel)
+        {
             Entry waterLevelEntry = new Entry(waterLevel)
             {
                 Label = DateTime.Now.ToString("h:mm:ss tt"),
-                ValueLabel = waterLevel.ToString() + "liters",
+                ValueLabel = waterLevel.ToString() + " liters",
                 Color = SKColor.Parse("#1E75D6")
             };
 
             return waterLevelEntry;
         }
-
 
 
         /// <summary>
@@ -185,8 +195,8 @@ namespace AgricoolMonitoringApp.Services
         /// Get watering tank level of Cooltainer specified in parameter
         /// </summary>
         /// <param name="cooltainerId">Id of Cooltainer of interest</param>
-        /// <returns>Water level in liters as int</returns>
-        private static int GetWaterTankLevel(int cooltainerId)
+        /// <returns>Water level in liters as float</returns>
+        private static float GetWaterTankLevel(int cooltainerId)
         {
             Random r = new Random();
             return r.Next(90, 99);

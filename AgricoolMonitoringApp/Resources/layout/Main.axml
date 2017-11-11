@@ -1,61 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:rowCount="5"
-    android:columnCount="3">
+    android:layout_height="wrap_content" >
 
-  <!-- Temperature line chart -->
-  <TextView
-    android:text="Temperature"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_row="0"
-    android:layout_column="0"
-    android:layout_columnSpan="3"
-    android:id="@+id/textView1" />
-  <microcharts.droid.ChartView
-      android:id="@+id/temperatureChartView1"
-      android:layout_row="1"
-      android:layout_column="0"
-      android:layout_columnSpan="3"
-      android:layout_width="match_parent"
-      android:layout_height="160dp" />
-  <!-- Humidity, CO2 and pressure pie charts (row) -->
-  <microcharts.droid.ChartView
-      android:id="@+id/humidityChartView1"
-      android:layout_row="2"
-      android:layout_column="0"
-      android:layout_width="60dp"
-      android:layout_height="80dp" />
-  <microcharts.droid.ChartView
-      android:id="@+id/co2ChartView1"
-      android:layout_row="2"
-      android:layout_column="1"
-       android:layout_width="60dp"
-     android:layout_height="80dp" />
-  <microcharts.droid.ChartView
-      android:id="@+id/pressureChartView1"
-      android:layout_row="2"
-      android:layout_column="2"
-       android:layout_width="60dp"
-     android:layout_height="80dp" />
-  <!-- Water level line chart -->
-  <TextView
-      android:text="Watering tank level"
-      android:textAppearance="?android:attr/textAppearanceSmall"
+  <GridLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_row="3"
-      android:layout_column="0"
-      android:layout_columnSpan="3"
-      android:id="@+id/textView1" />
-  <microcharts.droid.ChartView
-      android:id="@+id/waterLevelChartView1"
-      android:layout_row="4"
-      android:layout_column="0"
-      android:layout_columnSpan="3"
-      android:layout_width="match_parent"
-      android:layout_height="160dp" />
-</GridLayout>
+      android:rowCount="6"
+      android:columnCount="3">
+
+    <!-- Temperature line chart -->
+    <TextView
+        android:text="Temperature"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:id="@+id/textView1" />
+    <microcharts.droid.ChartView
+        android:id="@+id/temperatureChartView1"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_width="match_parent"
+        android:layout_height="160dp" />
+
+    <!-- Humidity, CO2 and pressure pie charts (row) -->
+    <TextView
+        android:text="Humidity"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_columnWeight="1"
+        android:gravity="left"
+        android:layout_gravity="fill_horizontal"
+        android:id="@+id/textView1" />
+    <TextView
+        android:text="CO2"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:gravity="center"
+        android:layout_gravity="fill_horizontal"
+        android:id="@+id/textView1" />
+    <TextView
+        android:text="Mist head pressure"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_row="2"
+        android:layout_column="2"
+        android:layout_columnWeight="1"
+        android:gravity="center"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginRight="2dp"
+        android:id="@+id/textView1" />
+
+    <microcharts.droid.ChartView
+        android:id="@+id/humidityChartView1"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:layout_columnWeight="1"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:layout_gravity="fill_horizontal"/>
+    <microcharts.droid.ChartView
+        android:id="@+id/co2ChartView1"
+        android:layout_row="3"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:layout_gravity="fill_horizontal"/>
+    <microcharts.droid.ChartView
+        android:id="@+id/pressureChartView1"
+        android:layout_row="3"
+        android:layout_column="2"
+        android:layout_columnWeight="1"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:layout_gravity="fill_horizontal"/>
+
+    <!-- Water level line chart -->
+    <TextView
+        android:text="Watering tank level"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+
+        android:id="@+id/textView1" />
+    <microcharts.droid.ChartView
+        android:id="@+id/waterLevelChartView1"
+        android:layout_row="5"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_width="match_parent"
+        android:layout_height="160dp" />
+  </GridLayout>
+</ScrollView>
